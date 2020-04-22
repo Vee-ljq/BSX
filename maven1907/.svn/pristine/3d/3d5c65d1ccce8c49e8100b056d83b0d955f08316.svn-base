@@ -1,0 +1,231 @@
+[{
+	"title" : "后台首页",
+	"icon" : "icon-computer",
+	"href" : "page/main.html",
+	"spread" : false
+	
+},{
+	"title" : "系统设置",
+	"icon" : "&#xe630;",
+	"href" : "",
+	"spread" : false,
+	"children" : [
+		{
+			"title" : "角色管理",
+			"icon" : "&#xe61c;",
+			"href" : "role/data.action",
+			"spread" : false
+		},
+		{
+			"title" : "资源管理",
+			"icon" : "&#xe61c;",
+			"href" : "resource/data.action",
+			"spread" : false
+		},
+		{
+			"title" : "组织架构管理",
+			"icon" : "&#xe61c;",
+			"href" : "org/data.action",
+			"spread" : false
+		},
+		
+		{
+			"title" : "员工管理",
+			"icon" : "&#xe61c;",
+			"href" : "user/data.action",
+			"spread" : false
+		},
+		
+		{
+			"title" : "登录",
+			"icon" : "&#xe609;",
+			"href" : "page/login/login.html",
+			"spread" : false,
+			"target" : "_blank"
+		}
+	]
+},{
+	"title" : "商品管理",
+	"icon" : "&#xe630;",
+	"href" : "",
+	"spread" : false,
+	"children" : [
+		{
+			"title" : "商品类别",
+			"icon" : "&#xe61c;",
+			"href" : "role/data.action",
+			"spread" : false
+		},
+		{
+			"title" : "商品列表",
+			"icon" : "&#xe61c;",
+			"href" : "resource/data.action",
+			"spread" : false
+		},
+		{
+			"title" : "商品发布",
+			"icon" : "&#xe61c;",
+			"href" : "org/data.action",
+			"spread" : false
+		},
+		
+		{
+			"title" : "闪购商品发布",
+			"icon" : "&#xe61c;",
+			"href" : "user/data.action",
+			"spread" : false
+		},
+		{
+			"title" : "团购商品发布",
+			"icon" : "&#xe61c;",
+			"href" : "user/data.action",
+			"spread" : false
+		},{
+			"title" : "活动管理发布",
+			"icon" : "&#xe61c;",
+			"href" : "user/data.action",
+			"spread" : false
+		},
+		{
+			"title" : "今日推荐",
+			"icon" : "&#xe61c;",
+			"href" : "user/data.action",
+			"spread" : false
+		}
+		,
+		{
+			"title" : "商品类别",
+			"icon" : "&#xe61c;",
+			"href" : "goodstype/Onetwo.action",
+			"spread" : false
+		}
+	]
+},{
+	"title" : "评价管理",
+	"icon" : "&#xe630;",
+	"href" : "",
+	"spread" : false,
+	"children" : [
+		{
+			"title" : "用户评价",
+			"icon" : "&#xe61c;",
+			"href" : "role/data.action",
+			"spread" : false
+		}
+	]
+},{
+	"title" : "物流公司管理",
+	"icon" : "icon-computer",
+	"href" : "page/main.html",
+	"spread" : false,
+	"children" : [
+		{
+			"title" : "物流公司",
+			"icon" : "&#xe61c;",
+			"href" : "role/data.action",
+			"spread" : false
+		}]
+},{
+	"title" : "客户管理",
+	"icon" : "&#xe630;",
+	"href" : "",
+	"spread" : false,
+	"children" : [
+		{
+			"title" : "客户列表",
+			"icon" : "&#xe61c;",
+			"href" : "role/data.action",
+			"spread" : false
+		}
+	]
+},{
+	"title" : "订单管理",
+	"icon" : "&#xe630;",
+	"href" : "",
+	"spread" : false,
+	"children" : [
+		{
+			"title" : "今日新增订单",
+			"icon" : "&#xe61c;",
+			"href" : "role/data.action",
+			"spread" : false
+		},
+		{
+			"title" : "未付款订单",
+			"icon" : "&#xe61c;",
+			"href" : "order/nopay.action",
+			"spread" : false
+		},
+		{
+			"title" : "待发货订单",
+			"icon" : "&#xe61c;",
+			"href" : "org/data.action",
+			"spread" : false
+		},
+		
+		{
+			"title" : "待签收订单",
+			"icon" : "&#xe61c;",
+			"href" : "order/signfor.action",
+			"spread" : false
+		},
+		{
+			"title" : "待评价订单",
+			"icon" : "&#xe61c;",
+			"href" : "user/data.action",
+			"spread" : false
+		}
+	]
+},{
+	"title" : "新闻管理",
+	"icon" : "&#xe630;",
+	"href" : "",
+	"spread" : false,
+	"children" : [
+		{
+			"title" : "商城公告",
+			"icon" : "&#xe61c;",
+			"href" : "role/data.action",
+			"spread" : false
+		},
+		{
+			"title" : "软赢科技/支付宝/物流管理",
+			"icon" : "&#xe61c;",
+			"href" : "role/data.action",
+			"spread" : false
+		}
+	]
+},{
+	"title" : "统计分析",
+	"icon" : "&#xe630;",
+	"href" : "",
+	"spread" : false,
+	"children" : [
+		{
+			"title" : "商品流量统计",
+			"icon" : "&#xe61c;",
+			"href" : "role/data.action",
+			"spread" : false
+		},
+		{
+			"title" : "用户注册统计",
+			"icon" : "&#xe61c;",
+			"href" : "role/data.action",
+			"spread" : false
+		}
+		,
+		{
+			"title" : "人均消费统计",
+			"icon" : "&#xe61c;",
+			"href" : "statistic/perCapitaConsumption.action",
+			"spread" : false
+		},
+		{
+			"title" : "销售金额统计",
+			"icon" : "&#xe61c;",
+			"href" : "role/data.action",
+			"spread" : false
+		}
+	]
+}
+]

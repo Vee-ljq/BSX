@@ -1,0 +1,141 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>文章列表--layui后台管理模板</title>
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<link rel="stylesheet" href="<%=path %>/js/layui/layui/css/layui.css" media="all" />
+	<link rel="stylesheet" href="//at.alicdn.com/t/font_tnyc012u2rlwstt9.css" media="all" />
+	<link rel="stylesheet" href="<%=path %>/js/ace/css/ace.css" media="all" />
+ 	<link rel="stylesheet" href="<%=path%>/js/ace/css/bootstrap.css"/>
+</head>
+<body class="childrenBody">
+
+	<blockquote class="layui-elem-quote news_search">
+	<form action="<%=path%>/order/data.action" class="layui-form">
+		<div class="layui-inline">
+		    <div class="layui-input-inline">
+		    	<input type="hidden" id="pageNumber" name="pageNum" value="${page.page.pageNum }"/>
+		    	<input type="hidden" id="pageSize" name="pageSize" value="${page.page.pageSize }"/>
+		    </div>
+		      <div class="layui-input-inline">
+		    <input name="cusName" type="text"  value="${orderDto.cusName }" class="layui-input search_input" placeholder="客户姓名">
+		    </div>
+		    <div class="layui-input-inline">
+		    <input name="orderno" value="${orderDto.orderno }" type="text" class="layui-input search_input" placeholder="订单编号">
+		    </div>
+		     <div class="layui-input-inline">
+		    <select name="status">
+		            <option value="" style="display:none">订单状态</option>
+					<option value="0" <c:if test="${orderDto.status==0}">selected</c:if>>待付款</option>
+					<option value="1" <c:if test="${orderDto.status==1}">selected</c:if>>待发货</option>
+					<option value="2" <c:if test="${orderDto.status==2}">selected</c:if>>待签收</option>
+					<option value="3" <c:if test="${orderDto.status==3}">selected</c:if>>待评价</option>
+					
+				</select>
+				</div>
+		    <input  type="submit" class="layui-btn search_btn " placeholder="客户姓名"  value="查询"/>
+		    
+		</div>
+		
+		
+			</form>
+	</blockquote>
+	
+	<div class="layui-form news_list">
+	  	<table class="layui-table">
+		    <colgroup>
+				<col width="2">
+				<col width="10%">
+				<col width="10%">
+				<col width="20%">
+				<col width="10%">
+				<!-- <col width="10%"> -->
+				<col width="20%">
+				<col width="10%">
+				</colgroup>
+		    <thead>
+				<tr>
+					
+					<th>订单编号</th>
+					<th>客户姓名</th>
+					<th>总金额</th>
+					<th>订单生成日期</th>
+					<th>商品数量</th>
+				<!-- 	<th>商品名称</th> -->
+					<th>收货地址</th>
+					<th>状态</th>
+					
+					
+				</tr> 
+		    </thead>
+		    <tbody class="news_content">
+		
+		    	<c:choose>
+		    		<c:when test="${fn:length(page.page.list)==0 }">
+		    			<tr>
+		    				<td colspan="8">暂无数据</td>
+		    			</tr>
+		    		</c:when>
+		    		<c:otherwise>
+		    			<c:forEach items="${requestScope.page.page.list }" var="order">
+		    			
+		    				<tr>
+					
+		    					<td>${order.orderno }</td>
+		    					<td>${order.cusName}</td>
+		    					<td>${order.totalcount}</td>
+		    					<td>${order.createdate}</td>
+		    					<td>
+		    					<c:set var="num" value="0"></c:set>
+		    					<c:forEach items="${order.orderdetail}" var="goodsnum">
+		    					<c:set var="num" value="${goodsnum.num +num }"></c:set>
+		    					
+		    					</c:forEach>
+		    					${num }
+		    					</td>
+		    					<%-- <td>
+		    					<c:forEach items="${order.orderdetail}" var="goods">
+		    					${goods.goods.goodsname}<br>
+		    					</c:forEach>
+		    					
+		    					</td> --%>
+		    					<td>${order.addre.address }</td>
+		    					
+		    					<td>
+		    						<c:if test="${order.status==0 }">待付款</c:if>
+		    						<c:if test="${order.status==1 }">待发货</c:if>
+		    						<c:if test="${order.status==2 }">待签收</c:if>
+		    						<c:if test="${order.status==3 }">待评价</c:if>
+		    					</td>
+		    					
+		    				</tr>
+		    			</c:forEach>
+		    		</c:otherwise>
+		    	</c:choose>
+		    </tbody>
+		</table>
+	</div>
+	  <div id="page">${page.pageStr }</div>
+	<script type="text/javascript" src="<%=path %>/js/layui/layui/layui.js"></script>
+<script>
+
+layui.use('form', function(){
+  var form = layui.form();
+  
+});
+</script>
+</body>
+</html>

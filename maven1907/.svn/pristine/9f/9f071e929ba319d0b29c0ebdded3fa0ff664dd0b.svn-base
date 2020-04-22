@@ -1,0 +1,101 @@
+package com.ry.controller;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+import Constant.Common;
+
+import com.ry.pojo.SUser;
+import com.ry.service.IndexService;
+import com.ry.service.IndexWebService;
+import com.ry.service.ResourceService;
+import com.ry.service.UserService;
+@Controller
+public class IndexController {
+	@Autowired
+	private UserService service;
+	@Autowired
+	private ResourceService resourceService;
+
+	@Autowired
+	private IndexService indexService;
+
+	@Autowired
+	private IndexWebService inservice;
+
+	
+/**
+ * 跳转到后台管理的主页面
+ * @return
+ */
+	@RequestMapping("index")
+
+	public ModelAndView toIndex(HttpSession session){
+		ModelAndView mav = new ModelAndView("index");
+		String todaymoney = indexService.selecttodaymoney();
+		session.setAttribute("todaymoney1", todaymoney);
+		mav.addObject("todaymoney", todaymoney);
+		System.out.println(todaymoney);
+		//查询客户总数量
+				int selectcount = inservice.selectcount();
+				//查询该日客户新注册的数量
+				int selectC=inservice.selectcounts();
+				mav.addObject("b", selectC);
+				mav.addObject("a", selectcount);
+		return mav;
+	} 
+
+	
+	
+
+	@RequestMapping("login")
+	public String login(SUser user,HttpSession session,String code){
+		String codeString = (String)session.getAttribute("code");
+		if(codeString.equals(code)){
+			boolean status = service.checkLogin(user);
+			if(status){
+				//user中只包含用户名和密码
+				user = service.selectByUsernameAndPwd(user);
+				session.setAttribute(Common.CURRENT_USER, user);
+				
+				
+				
+				
+				
+				return "redirect:index.action";
+			}
+			return "redirect:index.jsp";
+		}
+		return "redirect:index.jsp";
+	}
+	//请求获取类似于navs,json的数据
+	@RequestMapping("jsondata")
+	@ResponseBody
+	public List<Map> json(HttpSession session){
+		List<Map> list = new ArrayList<Map>();
+		SUser user = (SUser)session.getAttribute(Common.CURRENT_USER);
+		list = resourceService.selectResourceByRoleId(user.getRoleid()); 
+		return list;
+	}
+	/**
+	 * 今日销售额
+	 */
+	/*@RequestMapping("totalmoney")
+	public ModelAndView todaytotalmoney(){
+		ModelAndView mav = new ModelAndView("main");
+		Integer todaymoney = indexService.selecttodaymoney();
+		mav.addObject("todaymoney", todaymoney);
+		System.out.println(todaymoney);
+		return mav;
+	}*/
+	
+}

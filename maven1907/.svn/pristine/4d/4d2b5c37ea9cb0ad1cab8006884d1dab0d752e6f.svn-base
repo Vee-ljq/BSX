@@ -1,0 +1,75 @@
+package com.ry.controller;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.ry.dto.BTjgoodsDto;
+import com.ry.pojo.BGoods;
+import com.ry.pojo.BGoodstaste;
+import com.ry.pojo.BGoodstaste2;
+import com.ry.pojo.ViewAddr;
+import com.ry.service.GoodstypeService;
+
+@Controller
+@RequestMapping("/webHot")
+public class WebHotController {
+	
+@Autowired
+private GoodstypeService goodtypeService;
+	
+@RequestMapping("/toHot/{goodsid}")	
+
+	public ModelAndView toHot(@PathVariable Integer goodsid){
+	ModelAndView mav=new ModelAndView("web/hot");
+	//通过商品id查询TjGoodsDto
+	BTjgoodsDto bjdto=new BTjgoodsDto();
+	BGoods good=new BGoods();
+	good.setId(goodsid);
+	bjdto.setGoods(good);
+	bjdto =goodtypeService.selectQuickGoodsByGoodsid(bjdto);
+	//查询所有省份信息
+	List<ViewAddr> allpro = goodtypeService.selectAllProvence();
+	//月销量
+	int monthnum=goodtypeService.countMonthOrder(goodsid);
+	
+	//累计销量
+	int allordernum=goodtypeService.countAllOrderNum(goodsid);
+	//累计评价数量
+	int countcomment=goodtypeService.countAllCommentNum(goodsid);
+	//显示该商品所有的口味
+	 List<BGoodstaste>  tastes =goodtypeService.selectTasteByGoodsid(goodsid);
+	//显示所有商品包装
+	 List<BGoodstaste2> packages=goodtypeService.selectPackageByGoodsid(goodsid);
+	mav.addObject("bjdto", bjdto);
+	mav.addObject("allpro", allpro);
+	mav.addObject("monthnum", monthnum);
+	mav.addObject("allordernum", allordernum);
+	mav.addObject("goodsid", goodsid);
+	mav.addObject("countcomment", countcomment);
+	mav.addObject("tastes", tastes);
+	mav.addObject("packages", packages);
+	return mav;
+}
+@RequestMapping("showcity")
+@ResponseBody
+public List<ViewAddr> showCity(Integer provenceid){
+	List<ViewAddr> citylist=goodtypeService.selectAllCityByProid(provenceid);
+	return citylist;
+	
+}
+@RequestMapping("showXian")
+@ResponseBody
+
+public List<ViewAddr> showXian(Integer cityid){
+	List<ViewAddr> xianlist=goodtypeService.selectAllXianByCityid(cityid);
+	return xianlist;
+}
+
+}
