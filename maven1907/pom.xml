@@ -19,7 +19,7 @@
 	<dependency>
 	    <groupId>junit</groupId>
 	    <artifactId>junit</artifactId>
-	    <version>4.3</version>
+	    <version>4.13.1</version>
 	    <!-- 依赖的传递范围
 	    	1.compile 当前依赖在编译、测试、运行
 	    	2.provided 编译后测试有效，运行无效 servlet-api
